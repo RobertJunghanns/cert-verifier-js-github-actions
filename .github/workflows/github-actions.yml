@@ -1,4 +1,4 @@
-name: 
+name: gihub actions test and build 
 push:
   branches:
     - master
