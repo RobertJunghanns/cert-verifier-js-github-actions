@@ -33,4 +33,4 @@ jobs:
           with:
             node-version: '11.x'
         - name: after_success
-          run: npm run semantic-release
+          run: npm run semantic-release 
