@@ -1,5 +1,7 @@
 name: gihub actions test and build v2
 on: [push, pull_request]
+  branches:
+    - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,4 +35,6 @@ jobs:
         with:
           node-version: '11.x'
       - name: after_success
-        run: npm run semantic-release 
+        run: |   
+          npm install
+          npm run semantic-release 
