@@ -3,15 +3,12 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [11.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '11.x'
       - name: Install dependencies
         run: |   
           npm install
@@ -27,7 +24,14 @@ jobs:
           npm run test:coverage
           npm run test:coverage:report
   release:
-      if: ${{ github.ref == 'master' }}
-      needs: build
-      - name: after_success
-        run: npm run semantic-release
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'master' }}
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '11.x'
+        - name: after_success
+          run: npm run semantic-release
