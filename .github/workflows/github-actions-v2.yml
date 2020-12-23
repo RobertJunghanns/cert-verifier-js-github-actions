@@ -1,4 +1,4 @@
-name: gihub actions test and build v2
+name: gihub actions test, build, release v2
 on:
   push:
     branches:
