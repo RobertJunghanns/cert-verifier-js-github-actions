@@ -1,0 +1,30 @@
+name: gihub actions test and build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [11.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |   
+          npm install
+      - name: before_script
+        run: |    
+          npm run test
+          npm run lint
+      - name: script
+        run: | 
+          npm run build
+      - name: after_script
+        run: | 
+          npm run test:coverage
+          npm run test:coverage:report
+      - name: after_success
+        run: npm run semantic-release
