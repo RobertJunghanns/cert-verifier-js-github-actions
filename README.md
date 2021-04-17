@@ -8,7 +8,7 @@ A library to parse and verify [Blockcerts](https://www.blockcerts.org/) certific
 
 # Usage
 
-## Install
+## Install 
 
 ```shell
 $ npm i @blockcerts/cert-verifier-js   
